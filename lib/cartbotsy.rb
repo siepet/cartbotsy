@@ -39,12 +39,22 @@ module Cartbotsy
       message = "#{parsed_hash[:product_amount]} produkty dodane do " +
         "koszyka dla miasta #{parsed_hash[:channel_name].capitalize} przez użytkownika #{parsed_hash[:username]}."
       Cartbotsy::API.new(Cartbotsy::Config::API_TOKEN).post_message(message, "##{parsed_hash[:channel_name]}")
+      api_call(parsed_hash[:channel_name], parsed_hash[:product_link], parsed_hash[:product_amount])
       puts 'Message to Slack sent: ' + message
     end
 
     def self.handle_failure(parsed_hash)
       message = "COS ZEPSUŁEŚ KOLEGO #{parsed_hash[:username]}"
       Cartbotsy::API.new(Cartbotsy::Config::API_TOKEN).post_message(message, "##{parsed_hash[:channel_name]}")
+    end
+
+    def self.api_call(channel_name, product_link, product_amount)
+      api_hash = {
+        region_name: channel_name,
+        product_link: product_link,
+        product_amount: product_amount,
+      }
+      puts HTTMultiParty.post(Cartbotsy::Config::APP_URL + "/api/update", query: api_hash)
     end
   end
 end
