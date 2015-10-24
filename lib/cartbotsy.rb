@@ -1,7 +1,6 @@
 require "socket"
 require "cartbotsy/api"
 require "cartbotsy/configuration"
-require "cartbotsy/config"
 require "cartbotsy/parser"
 require "cartbotsy/worker"
 require "pry"
@@ -19,5 +18,3 @@ module Cartbotsy
     end
   end
 end
-
-Cartbotsy::Worker.start
