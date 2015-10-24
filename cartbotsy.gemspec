@@ -4,7 +4,7 @@ $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 require "cartbotsy/version"
 
 Gem::Specification.new do |spec|
-  spec.name          = "Cartbotsy"
+  spec.name          = "cartbotsy"
   spec.version       = Cartbotsy::VERSION
   spec.authors       = ["Marcin Siepetowski"]
   spec.email         = ["marcin.siepetowski@netguru.co"]
