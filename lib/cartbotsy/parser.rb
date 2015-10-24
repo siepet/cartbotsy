@@ -30,9 +30,9 @@ module Cartbotsy
 
     def parse_hash(hash)
       @token = hash["token"].first
-      @errors << 1301 unless token == Cartbotsy::Config::WEBHOOK_TOKEN
+      @errors << 1301 unless token == Cartbotsy.config.webhook_token
       @channel_name = hash["channel_name"].first
-      @errors << 1302 unless Cartbotsy::Config::AVAILABLE_CITIES.include?(channel_name)
+      @errors << 1302 unless Cartbotsy.config.available_cities.include?(channel_name)
       @username = hash["user_name"].first
       @message = hash["text"].first
     end

@@ -30,16 +30,16 @@ module Cartbotsy
     end
 
     def self.handle_success(parsed_hash)
-      message = "#{parsed_hash[:product_amount]} produkty dodane do " +
-        "koszyka dla miasta #{parsed_hash[:channel_name].capitalize} przez użytkownika #{parsed_hash[:username]}."
+      message = "#{parsed_hash[:product_amount]} products added to " +
+        "cart in #{parsed_hash[:channel_name].capitalize} city by user #{parsed_hash[:username]}."
       api_call(parsed_hash[:channel_name], parsed_hash[:product_link], parsed_hash[:product_amount])
-      Cartbotsy::API.new(Cartbotsy::Config::API_TOKEN).post_message(message, "##{parsed_hash[:channel_name]}")
+      Cartbotsy::API.new(Cartbotsy.config.api_token).post_message(message, "##{parsed_hash[:channel_name]}")
       puts 'Message to Slack sent: ' + message
     end
 
     def self.handle_failure(parsed_hash)
-      message = "COS ZEPSUŁEŚ KOLEGO #{parsed_hash[:username]}"
-      Cartbotsy::API.new(Cartbotsy::Config::API_TOKEN).post_message(message, "##{parsed_hash[:channel_name]}")
+      message = "You broke something, buddy! #{parsed_hash[:username]}"
+      Cartbotsy::API.new(Cartbotsy.config.api_token).post_message(message, "##{parsed_hash[:channel_name]}")
     end
 
     def self.api_call(channel_name, product_link, product_amount)
@@ -48,7 +48,7 @@ module Cartbotsy
         product_link: product_link,
         product_amount: product_amount,
       }
-      puts HTTMultiParty.post(Cartbotsy::Config::APP_URL + "/api/update", query: api_hash)
+      puts HTTMultiParty.post(Cartbotsy.config.app_url + "/api/update", query: api_hash)
     end
   end
 end
