@@ -25,7 +25,7 @@ module Cartbotsy
       while line = socket.gets
         response << line
       end
-      CGI::parse(response.last)
+      CGI.parse(response.last)
     end
 
     def parse_hash(hash)
