@@ -3,6 +3,7 @@ require "cartbotsy/api"
 require "cartbotsy/configuration"
 require "cartbotsy/parser"
 require "cartbotsy/worker"
+require "cartbotsy/railtie" if defined?(Rails)
 require "pry"
 
 module Cartbotsy
